@@ -1,4 +1,4 @@
-1.  web/master\_of\_calculator
+web/master\_of\_calculator
 
 > traditional calculator challenge
 >
@@ -80,11 +80,11 @@ It can call functions with the send(function, arg, arg, …) syntax. So, I
 changed my payload to this to call system(“ls”) using split to split the
 function into an array, since commas are blocked.
 
-> <img src="./media/image12.png"
-> style="width:5.48611in;height:0.65997in" />Two issues arose from this
-> implementation. The website does not print stdout, so calling
-> system(“ls”) is useless. I found a resolution for this quickly though,
-> as open(“|ls”).read will return the system(“ls”) stdout.
+<img src="./media/image12.png"
+style="width:5.48611in;height:0.65997in" />Two issues arose from this
+implementation. The website does not print stdout, so calling
+system(“ls”) is useless. I found a resolution for this quickly though,
+as open(“|ls”).read will return the system(“ls”) stdout.
 
 <img src="./media/image13.png"
 style="width:4.72797in;height:0.83447in" />
@@ -96,10 +96,10 @@ include the output in response. After fixing this issue, we have our
 final two payloads, where the second payload’s string is retrieved from
 the output of the first payload.
 
-> <img src="./media/image14.png"
-> style="width:5.94444in;height:0.52839in" /><img src="./media/image15.png"
-> style="width:4.90906in;height:5.07008in" /><img src="./media/image16.png"
-> style="width:6.04545in;height:0.96624in" />
+<img src="./media/image14.png"
+style="width:5.94444in;height:0.52839in" /><img src="./media/image15.png"
+style="width:4.90906in;height:5.07008in" /><img src="./media/image16.png"
+style="width:6.04545in;height:0.96624in" />
 
 <img src="./media/image17.png"
 style="width:5.40556in;height:1.50972in" />
@@ -115,5 +115,5 @@ codegate2024{sup3r\_dup3r\_ruby\_trick\_m4st3r}
 Looking back, since open was not a blocked word, the challenge could
 have been solved with this much shorter payload.
 
-> <img src="./media/image20.png"
-> style="width:5.46528in;height:0.17361in" />
+<img src="./media/image20.png"
+style="width:5.46528in;height:0.17361in" />
