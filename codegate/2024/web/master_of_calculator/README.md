@@ -33,17 +33,17 @@ style="width:3.76094in;height:1.83359in" />
 <img src="./media/image3.png"
 style="width:5.87718in;height:0.26057in" />
 
-style="width:3.29514in;height:2.37708in" />I used an online Ruby
-compiler to figure out what I could do - <https://onecompiler.com/ruby>.
+I used an online Ruby compiler to figure out what I could do - <https://onecompiler.com/ruby>.
 I started by figuring out how the user input led to code execution, and
 I found that the implementation of the ERB class takes user inputs as
 format strings, which the ERB stores as a string, and then evaluates.
 
 <img src="./media/image4.png"
-
+style="width:3.29514in;height:2.37708in" />
 <img src="./media/image5.png"
+style="width:0.64583in;height:1.70833in" />
 
-style="width:0.64583in;height:1.70833in" />So, using this, we can
+So, using this, we can
 execute our own code to somehow leak the filename and print the flag.
 Functions in Ruby do not require parentheses, so my first idea was to
 just use the open function with a string constructed with numbers and
@@ -83,7 +83,9 @@ changed my payload to this to call system(“ls”) using split to split the
 function into an array, since commas are blocked.
 
 <img src="./media/image12.png"
-style="width:5.48611in;height:0.65997in" />Two issues arose from this
+style="width:5.48611in;height:0.65997in" />
+
+Two issues arose from this
 implementation. The website does not print stdout, so calling
 system(“ls”) is useless. I found a resolution for this quickly though,
 as open(“|ls”).read will return the system(“ls”) stdout.
@@ -99,8 +101,12 @@ final two payloads, where the second payload’s string is retrieved from
 the output of the first payload.
 
 <img src="./media/image14.png"
-style="width:5.94444in;height:0.52839in" /><img src="./media/image15.png"
-style="width:4.90906in;height:5.07008in" /><img src="./media/image16.png"
+style="width:5.94444in;height:0.52839in" />
+
+<img src="./media/image15.png"
+style="width:4.90906in;height:5.07008in" />
+
+<img src="./media/image16.png"
 style="width:6.04545in;height:0.96624in" />
 
 <img src="./media/image17.png"
