@@ -1,0 +1,7 @@
+services:
+  babyheap:
+    build:
+      context: ./
+    ports:
+       - "7331:7331"
+    restart: always
