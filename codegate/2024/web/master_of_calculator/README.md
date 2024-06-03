@@ -33,14 +33,16 @@ style="width:3.76094in;height:1.83359in" />
 <img src="./media/image3.png"
 style="width:5.87718in;height:0.26057in" />
 
-<img src="./media/image4.png"
 style="width:3.29514in;height:2.37708in" />I used an online Ruby
 compiler to figure out what I could do - <https://onecompiler.com/ruby>.
 I started by figuring out how the user input led to code execution, and
 I found that the implementation of the ERB class takes user inputs as
 format strings, which the ERB stores as a string, and then evaluates.
 
+<img src="./media/image4.png"
+
 <img src="./media/image5.png"
+
 style="width:0.64583in;height:1.70833in" />So, using this, we can
 execute our own code to somehow leak the filename and print the flag.
 Functions in Ruby do not require parentheses, so my first idea was to
