@@ -125,10 +125,9 @@
 > only values that do matter are the flags, \_IO\_write\_base,
 > \_IO\_write\_ptr, and \_IO\_write\_end values.
 >
-> ![](./media/image10.emf)
-
-<https://sites.uclouvain.be/SystInfo/usr/include/libio.h.html>
-
+> <img src="./media/image10.png"
+> style="width:6.48877in;height:3.71829in" /><https://sites.uclouvain.be/SystInfo/usr/include/libio.h.html>
+>
 > Now, from the writeup above, the author said to set flags to
 > 0xfbad1800. Looking into this, it turns out that the 0xfbad portion of
 > flags is simply a magic number, defined by \_IO\_MAGIC. The 0x1800
