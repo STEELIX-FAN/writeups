@@ -1,0 +1,21 @@
+hostname JacobAaronAidenR6
+!
+int g0/0/1 
+ no shut
+ ip address 192.168.3.1 255.255.255.0
+ ip ospf 1 area 0
+!
+int g0/0/0
+ no shut
+ ip address 192.168.0.3 255.255.255.0
+!
+router eigrp 1 
+ eigrp router-id 6.6.6.6
+ network 192.168.3.0 0.0.0.255
+!
+router bgp 6
+ neighbor 192.168.0.2 remote-as 4
+ neighbor 192.168.0.1 remote-as 2
+ network 192.168.3.0 mask 255.255.255.0
+ address-family ipv4 unicast
+!

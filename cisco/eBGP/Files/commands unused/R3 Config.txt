@@ -1,0 +1,15 @@
+hostname JacobAaronAidenR3
+!
+int g0/0/1
+ ip address 192.168.2.2 255.255.255.0
+ no shut
+!
+int lo0
+ ip address 2.2.2.2 255.255.255.0
+ no shut
+!
+ip route 2.0.0.0 255.255.255.0 lo0
+router rip
+ network 192.168.2.0
+ redistribute static
+!

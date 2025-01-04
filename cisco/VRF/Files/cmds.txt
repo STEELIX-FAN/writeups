@@ -1,0 +1,19 @@
+ip vrf vrf1
+ip vrf vrf2
+
+int g1/0
+ ip vrf forwarding vrf1
+ ip add {addr12}
+ no shut
+int g3/0
+ ip vrf forwarding vrf1
+ ip add {addr22}
+ no shut
+ing g2/0
+ ip vrf forwarding vrf2
+ ip add {addr11}
+ no shut
+ing g4/0
+ ip vrf forwarding vrf2
+ ip add {addr12}
+ no shut

@@ -1,0 +1,55 @@
+JacobAaronAidenR1#show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is not set
+
+      1.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        1.1.1.0/24 is directly connected, Loopback0
+L        1.1.1.1/32 is directly connected, Loopback0
+      2.0.0.0/24 is subnetted, 1 subnets
+O E2     2.2.2.0 [110/1] via 192.168.1.1, 00:42:00, GigabitEthernet0/0/1
+      3.0.0.0/24 is subnetted, 1 subnets
+O E2     3.3.3.0 [110/1] via 192.168.1.1, 00:43:32, GigabitEthernet0/0/1
+O E2  192.168.0.0/24 [110/20] via 192.168.1.1, 00:45:54, GigabitEthernet0/0/1
+      192.168.1.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.1.0/24 is directly connected, GigabitEthernet0/0/1
+L        192.168.1.2/32 is directly connected, GigabitEthernet0/0/1
+O E2  192.168.2.0/24 [110/1] via 192.168.1.1, 00:42:00, GigabitEthernet0/0/1
+O E2  192.168.3.0/24 [110/1] via 192.168.1.1, 00:43:32, GigabitEthernet0/0/1
+
+JacobAaronAidenR1#show ipv6 route
+IPv6 Routing Table - default - 10 entries
+Codes: C - Connected, L - Local, S - Static, U - Per-user Static route
+       B - BGP, R - RIP, I1 - ISIS L1, I2 - ISIS L2
+       IA - ISIS interarea, IS - ISIS summary, D - EIGRP, EX - EIGRP external
+       ND - ND Default, NDp - ND Prefix, DCE - Destination, NDr - Redirect
+       O - OSPF Intra, OI - OSPF Inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
+       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2, a - Application
+O   2001::/64 [110/2]
+     via FE80::2F8:2CFF:FE7F:7191, GigabitEthernet0/0/1
+C   2001:1::/64 [0/0]
+     via GigabitEthernet0/0/1, directly connected
+L   2001:1::2/128 [0/0]
+     via GigabitEthernet0/0/1, receive
+C   2001:1:1:1::/64 [0/0]
+     via Loopback0, directly connected
+L   2001:1:1:1::1/128 [0/0]
+     via Loopback0, receive
+OE2 2001:2::/64 [110/1]
+     via FE80::2F8:2CFF:FE7F:7191, GigabitEthernet0/0/1
+OE2 2001:2:2:2::/64 [110/1]
+     via FE80::2F8:2CFF:FE7F:7191, GigabitEthernet0/0/1
+OE2 2001:3::/64 [110/1]
+     via FE80::2F8:2CFF:FE7F:7191, GigabitEthernet0/0/1
+OE2 2001:3:3:3::/64 [110/1]
+     via FE80::2F8:2CFF:FE7F:7191, GigabitEthernet0/0/1
+L   FF00::/8 [0/0]
+     via Null0, receive

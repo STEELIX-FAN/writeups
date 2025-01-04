@@ -1,0 +1,21 @@
+JacobAaronAidenR4#traceroute
+Protocol [ip]:
+Target IP address: 4.4.4.4
+Ingress traceroute [n]: yes
+Ingress interface: Loopback0
+DSCP Value [0]:
+Numeric display [n]:
+Timeout in seconds [3]:
+Probe count [3]:
+Minimum Time to Live [1]:
+Maximum Time to Live [30]:
+Port Number [33434]:
+Loose, Strict, Record, Timestamp, Verbose[none]:
+Type escape sequence to abort.
+Tracing the route to 4.4.4.4
+VRF info: (vrf in name/id, vrf out name/id)
+  1 2.2.2.2 1 msec 1 msec 0 msec
+  2 192.168.2.1 1 msec 1 msec 0 msec
+  3 192.168.1.1 [AS 1] 0 msec 1 msec 1 msec
+  4 192.168.0.1 [AS 1] 0 msec 1 msec 1 msec
+  5 192.168.3.2 [AS 1] 1 msec 2 msec *

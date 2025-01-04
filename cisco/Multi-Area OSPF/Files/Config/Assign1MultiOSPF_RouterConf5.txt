@@ -1,0 +1,149 @@
+hostname JacobAaronR5
+ipv uni
+router ospf 1
+ router-id 5.5.5.5
+ passive-interface GigabitEthernet0/0/1
+!
+ipv6 router ospf 1
+ router-id 5.5.5.5
+ passive-interface GigabitEthernet0/0/1
+!
+interface GigabitEthernet0/0/0
+ no shut
+ ip address 192.168.0.2 255.255.255.0
+ ip ospf 1 area 1
+ ipv6 address 2001:DB8:ACAD::2/64
+ ipv6 ospf 1 area 1
+!
+interface GigabitEthernet0/0/1
+ no shut
+ ip address 192.168.3.1 255.255.255.0
+ ipv6 address 2001:DB8:ACAD:3::1/64
+!
+
+---
+Current configuration : 1647 bytes
+!
+! Last configuration change at 20:45:00 UTC Fri Sep 8 2023
+!
+version 16.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname JacobAaronR5
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Mgmt-intf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+!
+no aaa new-model
+!
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+ipv6 unicast-routing
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+license udi pid ISR4321/K9 sn FLM24060912
+no license smart enable
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+!
+!
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 192.168.0.2 255.255.255.0
+ ip ospf 1 area 1
+ negotiation auto
+ ipv6 address 2001:DB8:ACAD::2/64
+ ipv6 ospf 1 area 1
+!
+interface GigabitEthernet0/0/1
+ ip address 192.168.3.1 255.255.255.0
+ negotiation auto
+ ipv6 address 2001:DB8:ACAD:3::1/64
+!
+interface GigabitEthernet0/2/0
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet0/2/1
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet0
+ vrf forwarding Mgmt-intf
+ no ip address
+ negotiation auto
+!
+router ospf 1
+ router-id 5.5.5.5
+ passive-interface GigabitEthernet0/0/1
+!
+ip forward-protocol nd
+no ip http server
+ip http secure-server
+ip tftp source-interface GigabitEthernet0
+!
+!
+ipv6 router ospf 1
+ router-id 5.5.5.5
+ passive-interface GigabitEthernet0/0/1
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ transport input none
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login
+!
+!
+!
+!
+!
+!
+end

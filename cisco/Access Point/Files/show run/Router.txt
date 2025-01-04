@@ -1,0 +1,162 @@
+Current configuration : 2406 bytes
+!
+! Last configuration change at 21:10:12 UTC Thu Jun 6 2024
+!
+version 15.5
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no platform punt-keepalive disable-kernel-core
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Mgmt-intf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+
+ip dhcp excluded-address 192.168.51.1
+ip dhcp excluded-address 192.168.52.1
+ip dhcp excluded-address 192.168.53.1
+!
+ip dhcp pool Guest
+ network 192.168.51.0 255.255.255.0
+ dns-server 1.1.1.1
+ default-router 192.168.51.1
+!
+ip dhcp pool Psk
+ network 192.168.52.0 255.255.255.0
+ dns-server 1.1.1.1
+ default-router 192.168.52.1
+!
+ip dhcp pool Enterprise
+ network 192.168.53.0 255.255.255.0
+ dns-server 1.1.1.1
+ default-router 192.168.53.1
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+multilink bundle-name authenticated
+!
+!
+!
+!
+license udi pid ISR4321/K9 sn FDO211216BL
+license accept end user agreement
+!
+spanning-tree extend system-id
+!
+!
+redundancy
+ mode none
+!
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ ip nat inside
+ negotiation auto
+!
+interface GigabitEthernet0/0/0.1
+ encapsulation dot1Q 1 native
+ ip address 10.0.11.1 255.255.255.0
+!
+interface GigabitEthernet0/0/0.11
+ encapsulation dot1Q 11
+ ip address 192.168.51.1 255.255.255.0
+ ip nat inside
+!
+interface GigabitEthernet0/0/0.12
+ encapsulation dot1Q 12
+ ip address 192.168.52.1 255.255.255.0
+ ip nat inside
+!
+interface GigabitEthernet0/0/0.13
+ encapsulation dot1Q 13
+ ip address 192.168.53.1 255.255.255.0
+ ip nat inside
+!
+interface GigabitEthernet0/0/1
+ ip address dhcp
+ ip nat outside
+ negotiation auto
+!
+interface Serial0/1/0
+ no ip address
+ shutdown
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0
+ vrf forwarding Mgmt-intf
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface Vlan1
+ no ip address
+!
+ip nat inside source list 1 interface GigabitEthernet0/0/1 overload
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+ip tftp source-interface GigabitEthernet0
+!
+!
+access-list 1 permit 192.168.51.0 0.0.0.255
+access-list 1 permit 192.168.52.0 0.0.0.255
+access-list 1 permit 192.168.53.0 0.0.0.255
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login
+!
+ntp server pool.ntp.org
+!
+end

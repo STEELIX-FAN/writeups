@@ -1,0 +1,16 @@
+hostname JacobAaronAidenR1
+!
+int g0/0/1
+ ip address 192.168.1.2 255.255.255.0
+ no shut
+ ip ospf 1 area 0
+!
+int lo0
+ ip address 1.1.1.1 255.255.255.0
+ no shut
+!
+ip route 1.0.0.0 255.255.255.0 lo0
+router ospf 1
+ router-id 1.1.1.1
+ redistribute static subnets
+!

@@ -1,0 +1,42 @@
+hostname JacobAaronAidenR4
+ipv6 unicast-routing
+!
+int g0/0/1 
+ no shut
+ ip address 192.168.2.1 255.255.255.0
+ ipv6 address 2001:2::1/64
+ ipv6 rip RIPforV6 enable
+!
+int g0/0/0
+ no shut
+ ip address 192.168.0.2 255.255.255.0
+ ipv6 address 2001::2/64
+!
+router rip
+ version 2
+ network 192.168.2.0
+ neighbor 192.168.2.2
+ passive-interface g0/0/0
+ redistribute bgp 4 metric 5
+ redistribute connected
+ no auto-summary
+!
+ipv6 router rip RIPforV6
+ redistribute bgp 4 metric 5
+ redistribute connected
+!
+router bgp 4
+ neighbor 192.168.0.3 remote-as 6
+ neighbor 192.168.0.1 remote-as 2
+ neighbor 2001::1 remote-as 2
+ neighbor 2001::3 remote-as 6
+ address-family ipv4 unicast
+  redistribute rip
+  no auto-summary
+ !
+ address-family ipv6
+  neighbor 2001::1 activate
+  neighbor 2001::3 activate
+  redistribute rip RIPforV6 include-connected
+  no auto-summary
+!

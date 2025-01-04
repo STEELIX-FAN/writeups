@@ -1,0 +1,28 @@
+conf t
+ip vrf vrf1
+ip vrf vrf2
+
+router ospf 10 vrf vrf1
+router ospf 20 vrf vrf2
+
+! IPs follow 10.vrf.network.location
+int g1/0
+ ip vrf forwarding vrf1
+ ip ospf 10 a 0
+ ip add 10.1.5.1 255.255.255.0
+ no shut
+int g2/0
+ ip vrf forwarding vrf1
+ ip ospf 10 a 0
+ ip add 10.1.4.2 255.255.255.0
+ no shut
+int g3/0
+ ip vrf forwarding vrf2
+ ip ospf 20 a 0
+ ip add 10.2.5.1 255.255.255.0
+ no shut
+int g4/0
+ ip vrf forwarding vrf2
+ ip ospf 20 a 0
+ ip add 10.2.4.2 255.255.255.0
+ no shut

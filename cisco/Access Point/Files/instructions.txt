@@ -1,0 +1,84 @@
+standalone fat ap
+preconfiged
+.*k9w8.* for wlan
+.*k9w7.* for standalone
+
+instructions for k9w7 in assignment
+
+tftp server software -> tftpd64
+firewall off
+
+ethernet cable between pc and ap - static defined
+pc is 10.0.0.1 ap is 10.0.0.2
+
+2 hrs to change os
+
+boot existing os
+delete credentials - hack os
+user pass both Cisco
+setup tftp
+check ping
+use script to delete and tftp new os
+reboot without copy run start - do not reboot while upgrading
+
+3 ssid
+2 normal wpa2 psk=Cisco123, 1 wpa2 enterprise with local user:pass
+enterprise references user pass (dont know if possible)
+
+ssid naming scheme: CCNP_67_\d{3}_SSID_{# or "enterprise"}
+
+3 vlans for ssids with a layer 3 switch
+
+signoff - get 3 ssids onto internet
+randomly generated user cannot get on ssid
+then make it work
+
+
+
+Step 1: Access Cisco AP|Reset AP| Assign static IP for BVI1 Interface |Default-gateway IP
+enable
+Password: Cisco                    [Cisco AP default Password]
+Reset  the Access Point with pressing and holding  mode button ##
+ap#configure terminal
+ap(config)#interface bvI 1
+ap(config-if)#ip address 192.168.2.4 255.255.255.0 [According to my network setup]
+ap(config-if)#exit
+ap(config)#ip default-gateway 192.168.2.1        [According to my network setup]
+
+Step 2: Creating SSID | Authentication | Applying WPAv2 Authentication
+
+ap(config)#dot11 ssid Cisco_WLAN
+ap(config-ssid)#guest-mode
+ap(config-ssid)#authentication open
+ap(config-ssid)#authentication key-management wpa version 2
+ap(config-ssid)#wpa-psk ascii Cisco123
+ap(config-ssid)#exit
+
+Step 3: Enable Encryption to 4.2GHz Radio interface | Apply SSID to interface| Enable Radio Interface
+
+ap(config)#interface dot11Radio 0
+ap(config-if)#encryption mode ciphers aes-ccm
+ap(config-if)#ssid Cisco_WLAN
+ap(config-if)#channel least-congested
+ap(config-if)#no shutdown
+ap(config-if)#exit
+ap(config)#exit
+               ====  For 5 GHz Radio Interface  ===
+
+Step 2: Creating SSID | Authentication | Applying WPAv2 Authentication
+
+ap(config)#dot11 ssid Cisco_WLAN 5GHz
+ap(config-ssid)#guest-mode
+ap(config-ssid)#authentication open
+ap(config-ssid)#authentication key-management wpa version 2
+ap(config-ssid)#wpa-psk ascii Cisco123
+ap(config-ssid)#exit
+
+Step 3: Enable Encryption to 5 GHz Radio interface | Apply SSID to interface| Enable Radio Interface
+
+ap(config)#interface dot11Radio 1
+ap(config-if)#encryption mode ciphers aes-ccm
+ap(config-if)#ssid Cisco_WLAN 5GHz
+ap(config-if)# channel  36
+ap(config-if)#no shutdown
+ap(config-if)#exit

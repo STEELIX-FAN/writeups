@@ -1,0 +1,37 @@
+ip dhcp excluded-address 192.168.4.2
+ip dhcp excluded-address 192.168.2.1
+ip dhcp excluded-address 192.168.3.1
+ip dhcp excluded-address 192.168.4.1
+ip dhcp excluded-address 192.168.1.1
+
+
+ip dhcp pool vlan2
+network 192.168.2.0 255.255.255.0
+dns-server 1.1.1.1
+default-router 192.168.2.1
+domain-name aaron.com
+
+ip dhcp pool vlan3
+network 192.168.3.0 255.255.255.0
+dns-server 1.1.1.1
+default-router 192.168.3.1
+domain-name aiden.com
+
+ip dhcp pool vlan4
+network 192.168.4.0 255.255.255.0
+dns-server 1.1.1.1
+default-router 192.168.4.1
+domain-name Jacob.com
+
+int vlan 2
+ip add 192.168.2.1 255.255.255.0
+
+int vlan 3
+ip add 192.168.3.1 255.255.255.0
+
+int vlan 4
+ip add 192.168.4.1 255.255.255.0
+
+ip default-gateway 192.168.0.1
+ip classless
+ip route 0.0.0.0 0.0.0.0 192.168.0.1

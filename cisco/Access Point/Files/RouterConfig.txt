@@ -1,0 +1,16 @@
+int g0/0/1
+ip add 192.168.0.1 255.255.0.0
+ip nat inside
+
+int g0/0/0
+ip address dhcp
+ip nat outside
+negotiation auto
+!
+access-list 10 permit any
+
+ip nat pool pool 10.0.0.16 10.0.0.31 netmask 255.255.255.224
+ip nat inside source list 10 pool pool
+ip forward-protocol nd
+no ip http server
+no ip http secure-server

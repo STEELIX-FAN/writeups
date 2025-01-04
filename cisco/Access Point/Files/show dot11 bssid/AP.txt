@@ -1,0 +1,4 @@
+Interface      BSSID         Guest  SSID
+Dot11Radio1   64d9.89bd.f050  Yes  JacobAaronAiden_67_CCNP_Ent
+Dot11Radio1   64d9.89bd.f051  Yes  JacobAaronAiden_67_CCNP_Guest
+Dot11Radio1   64d9.89bd.f052  Yes  JacobAaronAiden_67_CCNP_Personal

@@ -1,0 +1,183 @@
+Current configuration : 4029 bytes
+
+! Last configuration change at 04:58:51 UTC Fri Mar 1 2002
+version 15.3
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+
+hostname AP
+
+logging rate-limit console 9
+enable secret 5 $1$ySJC$WKGeN6ausDAtFkMop0BIE1
+
+aaa new-model
+
+aaa group server radius AP_RAD_GROUP
+ server name Jacob_PC
+
+aaa authentication login eap_methods group AP_RAD_GROUP
+
+aaa session-id common
+no ip source-route
+no ip cef
+no ip domain lookup
+
+dot11 pause-time 100
+dot11 syslog
+
+dot11 ssid JacobAaronAiden_67_CCNP_Ent
+   vlan 13
+   authentication open eap eap_methods
+   authentication network-eap eap_methods
+   authentication key-management wpa version 2
+   mbssid guest-mode
+
+dot11 ssid JacobAaronAiden_67_CCNP_Guest
+   vlan 11
+   authentication open
+   mbssid guest-mode
+
+dot11 ssid JacobAaronAiden_67_CCNP_Personal
+   vlan 12
+   authentication open
+   authentication key-management wpa version 2
+   mbssid guest-mode
+   wpa-psk ascii 7 106D000A061843595F
+
+eap profile AUTH_METHODS
+ method mschapv2
+
+no ipv6 cef
+
+username Cisco password 7 01300F175804
+
+bridge irb
+
+interface Dot11Radio0
+ no ip address
+ shutdown
+ antenna gain 0
+ station-role root
+ bridge-group 1
+ bridge-group 1 subscriber-loop-control
+ bridge-group 1 spanning-disabled
+ bridge-group 1 block-unknown-source
+ no bridge-group 1 source-learning
+ no bridge-group 1 unicast-flooding
+
+interface Dot11Radio1
+ no ip address
+ 
+ encryption vlan 12 mode ciphers aes-ccm
+ 
+ encryption vlan 13 mode ciphers aes-ccm
+ 
+ ssid JacobAaronAiden_67_CCNP_Ent
+ 
+ ssid JacobAaronAiden_67_CCNP_Guest
+ 
+ ssid JacobAaronAiden_67_CCNP_Personal
+ 
+ antenna gain 0
+ peakdetect
+ dfs band 3 block
+ mbssid
+ channel dfs
+ station-role root
+
+interface Dot11Radio1.1
+ encapsulation dot1Q 1 native
+ bridge-group 1
+ bridge-group 1 subscriber-loop-control
+ bridge-group 1 spanning-disabled
+ bridge-group 1 block-unknown-source
+ no bridge-group 1 source-learning
+ no bridge-group 1 unicast-flooding
+
+interface Dot11Radio1.11
+ encapsulation dot1Q 11
+ bridge-group 11
+ bridge-group 11 subscriber-loop-control
+ bridge-group 11 spanning-disabled
+ bridge-group 11 block-unknown-source
+ no bridge-group 11 source-learning
+ no bridge-group 11 unicast-flooding
+
+interface Dot11Radio1.12
+ encapsulation dot1Q 12
+ bridge-group 12
+ bridge-group 12 subscriber-loop-control
+ bridge-group 12 spanning-disabled
+ bridge-group 12 block-unknown-source
+ no bridge-group 12 source-learning
+ no bridge-group 12 unicast-flooding
+
+interface Dot11Radio1.13
+ encapsulation dot1Q 13
+ bridge-group 13
+ bridge-group 13 subscriber-loop-control
+ bridge-group 13 spanning-disabled
+ bridge-group 13 block-unknown-source
+ no bridge-group 13 source-learning
+ no bridge-group 13 unicast-flooding
+
+interface GigabitEthernet0
+ no ip address
+ duplex auto
+ speed auto
+ dot1x pae authenticator
+
+interface GigabitEthernet0.1
+ encapsulation dot1Q 1 native
+ bridge-group 1
+ bridge-group 1 spanning-disabled
+ no bridge-group 1 source-learning
+
+interface GigabitEthernet0.11
+ encapsulation dot1Q 11
+ bridge-group 11
+ bridge-group 11 spanning-disabled
+ no bridge-group 11 source-learning
+
+interface GigabitEthernet0.12
+ encapsulation dot1Q 12
+ bridge-group 12
+ bridge-group 12 spanning-disabled
+ no bridge-group 12 source-learning
+
+interface GigabitEthernet0.13
+ encapsulation dot1Q 13
+ bridge-group 13
+ bridge-group 13 spanning-disabled
+ no bridge-group 13 source-learning
+
+interface BVI1
+ mac-address 44d3.ca03.7d9b
+ ip address 10.0.11.200 255.255.255.0
+ ipv6 address dhcp
+ ipv6 address autoconfig
+ ipv6 enable
+
+ip forward-protocol nd
+ip http server
+no ip http secure-server
+ip http help-path http://www.cisco.com/warp/public/779/smbiz/prodconfig/help/eag
+
+radius server Jacob_PC
+ address ipv4 10.0.11.100 auth-port 1812 acct-port 1813
+ timeout 10
+ retransmit 3
+ key 7 111D1C16031B050B557878
+
+bridge 1 route ip
+
+wlccp ap eap profile AUTH_METHODS
+
+line con 0
+ logging synchronous
+line vty 0 4
+ transport input all
+
+end

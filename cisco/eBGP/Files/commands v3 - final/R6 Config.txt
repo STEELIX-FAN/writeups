@@ -1,0 +1,52 @@
+hostname JacobAaronAidenR6
+ipv6 unicast-routing
+!
+int g0/0/1 
+ no shut
+ ip address 192.168.3.1 255.255.255.0
+ ipv6 address 2001:3::1/64
+ ipv6 eigrp 1
+!
+int g0/0/0
+ no shut
+ ip address 192.168.0.3 255.255.255.0
+ ipv6 address 2001::3/64
+!
+router eigrp 1 
+ eigrp router-id 6.6.6.6
+ network 192.168.3.0 0.0.0.255
+ passive-interface g0/0/0
+ redistribute bgp 6 metric 10000 100 255 1 1500
+ redistribute connected
+!
+ipv6 router eigrp 1
+ eigrp router-id 6.6.6.6
+ passive-interface g0/0/0
+ redistribute bgp 6 metric 10000 100 255 1 1500
+ redistribute connected
+!
+router bgp 6
+ neighbor 192.168.0.2 remote-as 4
+ neighbor 192.168.0.1 remote-as 2
+ neighbor 2001::1 remote-as 2
+ neighbor 2001::2 remote-as 4
+ address-family ipv4 unicast
+  redistribute eigrp 1
+  neighbor 192.168.0.1 next-hop-self
+  neighbor 192.168.0.1 weight 200
+  neighbor 192.168.0.2 route-map map out
+  no auto-summary
+ !
+ address-family ipv6
+  neighbor 2001::1 activate
+  neighbor 2001::2 activate
+  redistribute eigrp 1 include-connected
+  no auto-summary
+ !
+!
+access-list 1 permit any
+!
+route-map map permit 10
+ match ip address 1
+ set metric 500
+!

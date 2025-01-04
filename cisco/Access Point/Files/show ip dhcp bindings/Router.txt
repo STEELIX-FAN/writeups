@@ -1,0 +1,8 @@
+Bindings from all pools not associated with VRF:
+IP address      Client-ID/              Lease expiration        Type       State      Interface
+                Hardware address/
+                User name
+192.168.51.3    0114.abc5.36cc.2a       Jun 07 2024 09:39 PM    Automatic  Active     GigabitEthernet0/0/0.11
+192.168.52.2    01ac.ed5c.3e56.89       Jun 07 2024 09:08 PM    Automatic  Active     GigabitEthernet0/0/0.12
+192.168.52.3    0114.abc5.36cc.2a       Jun 07 2024 09:40 PM    Automatic  Active     GigabitEthernet0/0/0.12
+192.168.53.2    01ac.ed5c.3e56.89       Jun 07 2024 05:52 PM    Automatic  Active     GigabitEthernet0/0/0.13

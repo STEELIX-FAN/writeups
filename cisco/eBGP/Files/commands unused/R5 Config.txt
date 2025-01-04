@@ -1,0 +1,16 @@
+hostname JacobAaronAidenR5
+!
+int g0/0/1
+ ip address 192.168.3.2 255.255.255.0
+ no shut
+!
+int lo0
+ ip address 3.3.3.3 255.255.255.0
+ no shut
+!
+ip route 3.0.0.0 255.255.255.0 lo0
+router eigrp 1
+ eigrp router-id 5.5.5.5
+ network 192.168.3.0 0.0.0.255
+ redistribute static
+!

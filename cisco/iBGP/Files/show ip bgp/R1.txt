@@ -1,0 +1,19 @@
+BGP table version is 17, local router ID is 192.168.3.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ *>  2.2.2.0/24       192.168.0.2              1         32768 i
+ * i                  192.168.1.2              1    100      0 i
+ *>  4.4.4.0/24       192.168.3.2              0             0 2 i
+ * i 192.168.0.0      192.168.0.2              0    100      0 i
+ *>                   0.0.0.0                  0         32768 i
+ *>  192.168.1.0      192.168.0.2              2         32768 i
+ * i                  192.168.0.2              0    100      0 i
+ *>  192.168.2.0      192.168.0.2              1         32768 i
+ * i                  192.168.1.2              1    100      0 i
+ *   192.168.3.0      192.168.3.2              0             0 2 i
+ *>                   0.0.0.0                  0         32768 i

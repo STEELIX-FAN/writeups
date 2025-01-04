@@ -1,0 +1,24 @@
+hostname JacobAaronAidenR5
+ipv6 unicast-routing
+!
+int g0/0/1
+ ip address 192.168.3.2 255.255.255.0
+ ipv6 address 2001:3::2/64
+ no shut
+ ipv6 eigrp 1
+!
+int lo0
+ ip address 3.3.3.3 255.255.255.0
+ ipv6 address 2001:3:3:3::3/64
+ no shut
+ ipv6 eigrp 1
+!
+router eigrp 1
+ eigrp router-id 5.5.5.5
+ network 192.168.3.0 0.0.0.255
+ redistribute connected metric 10000 100 255 1 1500
+!
+ipv6 router eigrp 1
+ eigrp router-id 5.5.5.5
+ redistribute connected metric 10000 100 255 1 1500
+!

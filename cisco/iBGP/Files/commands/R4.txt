@@ -1,0 +1,15 @@
+en
+conf t
+hostname JacobAaronAidenR4
+int GigabitEthernet0/0/0
+ ip address 192.168.2.2 255.255.255.0
+ no shutdown
+int Loopback0
+ ip address 2.2.2.2 255.255.255.0
+ no shutdown
+router bgp 3
+ neighbor 192.168.2.1 remote-as 1
+ address-family ipv4 unicast
+  redistribute connected
+  network 192.168.2.0 mask 255.255.255.0
+  network 2.2.2.0 mask 255.255.255.0

@@ -1,0 +1,10 @@
+hostname JacobAaronAidenR4
+int g0/0/1
+ no shut 
+ ip add 10.0.2.2 255.255.255.0
+ ip ospf 1 area 2
+!
+router ospf 1
+ router-id 4.4.4.4
+ area 2 stub no-summary
+!

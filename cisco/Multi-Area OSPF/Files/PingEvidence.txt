@@ -1,0 +1,118 @@
+AaronJacobR4#traceroute 192.168.0.2
+Type escape sequence to abort.
+Tracing the route to 192.168.0.2
+VRF info: (vrf in name/id, vrf out name/id)
+  1 192.168.2.3 1 msec 0 msec 1 msec
+  2 192.168.5.1 0 msec 1 msec 0 msec
+  3 192.168.1.1 1 msec 1 msec 1 msec
+  4 192.168.0.2 1 msec 1 msec *
+AaronJacobR4#traceroute 2001:db8:acad:0::2
+Type escape sequence to abort.
+Tracing the route to 2001:DB8:ACAD::2
+
+  1 2001:DB8:ACAD:2::3 1 msec 1 msec 1 msec
+  2 2001:DB8:ACAD:5::1 1 msec 1 msec 0 msec
+  3 2001:DB8:ACAD:1::1 1 msec 1 msec 0 msec
+  4 2001:DB8:ACAD::2 1 msec 1 msec 1 msec
+AaronJacobR4#
+AaronJacobR4#ping 192.168.0.2
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.0.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+AaronJacobR4#ping 192.168.0.3
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.0.3, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+
+AaronJacobR4#ping 2001:db8:acad::2
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 2001:DB8:ACAD::2, timeout is 2 seconds:d
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 2/6/22 ms
+AaronJacobR4#ping 2001:db8:acad::3
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 2001:DB8:ACAD::3, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+
+JacobAaronR1#show ip ospf neighbor
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+2.2.2.2           1   FULL/BDR        00:00:32    192.168.1.2     GigabitEthernet0/0/1
+5.5.5.5           1   FULL/DR         00:00:32    192.168.0.2     GigabitEthernet0/0/0
+JacobAaronR1#
+
+JacobAaronR2#show ip ospf neighbor
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+1.1.1.1           1   FULL/DR         00:00:32    192.168.1.1     GigabitEthernet0/0/1
+3.3.3.3           1   FULL/DR         00:00:31    192.168.5.2     GigabitEthernet0/0/0
+JacobAaronR2#
+
+AaronJacobR3#show ip ospf neighbor
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+4.4.4.4           1   FULL/DR         00:00:33    192.168.2.4     GigabitEthernet0/0/1
+2.2.2.2           1   FULL/BDR        00:00:33    192.168.5.1     GigabitEthernet0/0/0
+AaronJacobR3#
+
+AaronJacobR4#show ip ospf neighbor
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+3.3.3.3           1   FULL/BDR        00:00:35    192.168.2.3     GigabitEthernet0/0/1
+AaronJacobR4#
+
+JacobAaronR5#show ip ospf neighbor
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+1.1.1.1           1   FULL/BDR        00:00:39    192.168.0.3     GigabitEthernet0/0/0
+JacobAaronR5#
+
+JacobAaronR2#show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is not set
+
+O IA  192.168.0.0/24 [110/2] via 192.168.1.1, 00:25:11, GigabitEthernet0/0/1
+      192.168.1.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.1.0/24 is directly connected, GigabitEthernet0/0/1
+L        192.168.1.2/32 is directly connected, GigabitEthernet0/0/1
+O     192.168.2.0/24 [110/2] via 192.168.5.2, 00:20:55, GigabitEthernet0/0/0
+      192.168.5.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.5.0/24 is directly connected, GigabitEthernet0/0/0
+L        192.168.5.1/32 is directly connected, GigabitEthernet0/0/0
+JacobAaronR2#
+
+JacobAaronR2#
+JacobAaronR2#show ipv6 route
+IPv6 Routing Table - default - 7 entries
+Codes: C - Connected, L - Local, S - Static, U - Per-user Static route
+       B - BGP, R - RIP, I1 - ISIS L1, I2 - ISIS L2
+       IA - ISIS interarea, IS - ISIS summary, D - EIGRP, EX - EIGRP external
+       ND - ND Default, NDp - ND Prefix, DCE - Destination, NDr - Redirect
+       O - OSPF Intra, OI - OSPF Inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
+       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2, a - Application
+OI  2001:DB8:ACAD::/64 [110/2]
+     via FE80::B6A8:B9FF:FE47:8E41, GigabitEthernet0/0/1
+C   2001:DB8:ACAD:1::/64 [0/0]
+     via GigabitEthernet0/0/1, directly connected
+L   2001:DB8:ACAD:1::2/128 [0/0]
+     via GigabitEthernet0/0/1, receive
+O   2001:DB8:ACAD:2::/64 [110/2]
+     via FE80::B6A8:B9FF:FE01:B750, GigabitEthernet0/0/0
+C   2001:DB8:ACAD:5::/64 [0/0]
+     via GigabitEthernet0/0/0, directly connected
+L   2001:DB8:ACAD:5::1/128 [0/0]
+     via GigabitEthernet0/0/0, receive
+L   FF00::/8 [0/0]
+     via Null0, receive
+JacobAaronR2#

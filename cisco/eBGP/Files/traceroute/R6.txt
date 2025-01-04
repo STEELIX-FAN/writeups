@@ -1,0 +1,35 @@
+JacobAaronAidenR6#traceroute 1.1.1.1
+Type escape sequence to abort.
+Tracing the route to 1.1.1.1
+VRF info: (vrf in name/id, vrf out name/id)
+  1 192.168.0.1 0 msec 1 msec 0 msec
+  2 192.168.1.2 [AS 2] 1 msec 1 msec *
+JacobAaronAidenR6#traceroute 2.2.2.2
+Type escape sequence to abort.
+Tracing the route to 2.2.2.2
+VRF info: (vrf in name/id, vrf out name/id)
+  1 192.168.0.2 0 msec 1 msec 0 msec
+  2 192.168.2.2 [AS 4] 1 msec 1 msec *
+JacobAaronAidenR6#traceroute 3.3.3.3
+Type escape sequence to abort.
+Tracing the route to 3.3.3.3
+VRF info: (vrf in name/id, vrf out name/id)
+  1 192.168.3.2 1 msec 1 msec *
+JacobAaronAidenR6#traceroute 2001:1:1:1::1
+Type escape sequence to abort.
+
+Tracing the route to 2001:1:1:1::1
+
+  1 2001::1 1 msec 1 msec 0 msec
+  2 2001:1::2 [AS 2] 1 msec 1 msec 1 msec
+JacobAaronAidenR6#traceroute 2001:2:2:2::2
+Type escape sequence to abort.
+Tracing the route to 2001:2:2:2::2
+
+  1 2001::2 1 msec 1 msec 0 msec
+  2 2001:2::2 [AS 4] 1 msec 1 msec 1 msec
+JacobAaronAidenR6#traceroute 2001:3:3:3::3
+Type escape sequence to abort.
+Tracing the route to 2001:3:3:3::3
+
+  1 2001:3::2 7 msec 1 msec 1 msec

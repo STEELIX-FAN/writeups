@@ -1,0 +1,13 @@
+Gateway of last resort is not set
+
+      2.0.0.0/24 is subnetted, 1 subnets
+B        2.2.2.0 [20/1] via 192.168.3.1, 00:31:39
+      4.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        4.4.4.0/24 is directly connected, Loopback0
+L        4.4.4.4/32 is directly connected, Loopback0
+B     192.168.0.0/24 [20/0] via 192.168.3.1, 00:44:57
+B     192.168.1.0/24 [20/2] via 192.168.3.1, 00:38:49
+B     192.168.2.0/24 [20/1] via 192.168.3.1, 00:36:16
+      192.168.3.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.3.0/24 is directly connected, GigabitEthernet0/0/1
+L        192.168.3.2/32 is directly connected, GigabitEthernet0/0/1

@@ -1,0 +1,25 @@
+hostname JacobAaronAidenR3
+ipv6 unicast-routing
+!
+int g0/0/1
+ no shut
+ ip address 192.168.2.2 255.255.255.0
+ ipv6 address 2001:2::2/64
+ ipv6 rip RIPforV6 enable
+!
+int lo0
+ ip address 2.2.2.2 255.255.255.0
+ ipv6 address 2001:2:2:2::2/64
+ no shut
+ ipv6 rip RIPforV6 enable
+!
+router rip
+ version 2
+ network 192.168.2.0
+ neighbor 192.168.2.1
+ redistribute connected metric transparent
+ no auto-summary
+!
+ipv6 router rip RIPforV6
+ redistribute connected metric 5
+!

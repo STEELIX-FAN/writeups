@@ -1,0 +1,15 @@
+hostname JacobAaronAidenR8
+int lo0
+ ip add 34.34.34.34 255.0.0.0
+!
+ip route 0.0.0.0 0.0.0.0 lo0
+!
+int g0/0/1
+ no shut 
+ ip add 10.0.4.2 255.255.255.0
+ ip ospf 1 area 4
+!
+router ospf 1
+ router-id 8.8.8.8
+ default-information originate
+!

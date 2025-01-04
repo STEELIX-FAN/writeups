@@ -1,0 +1,120 @@
+
+ Last configuration change at 20:29:24 UTC Wed Nov 8 2023
+
+version 15.5
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no platform punt-keepalive disable-kernel-core
+
+hostname JacobAaronAidenR4
+
+boot-start-marker
+boot-end-marker
+
+vrf definition Mgmt-intf
+ 
+ address-family ipv4
+ exit-address-family
+ 
+ address-family ipv6
+ exit-address-family
+
+no aaa new-model
+
+ipv6 unicast-routing
+
+subscriber templating
+multilink bundle-name authenticated
+
+license udi pid ISR4321/K9 sn FDO21442B21
+
+spanning-tree extend system-id
+
+redundancy
+ mode none
+
+vlan internal allocation policy ascending
+
+interface GigabitEthernet0/0/0
+ ip address 192.168.0.2 255.255.255.0
+ negotiation auto
+ ipv6 address 2001::2/64
+ ipv6 rip RIPforV6 enable
+
+interface GigabitEthernet0/0/1
+ ip address 192.168.2.1 255.255.255.0
+ negotiation auto
+ ipv6 address 2001:2::1/64
+ ipv6 rip RIPforV6 enable
+
+interface Serial0/1/0
+ no ip address
+
+interface Serial0/1/1
+ no ip address
+
+interface GigabitEthernet0/2/0
+ no ip address
+ negotiation auto
+
+interface GigabitEthernet0/2/1
+ no ip address
+ negotiation auto
+
+interface GigabitEthernet0
+ vrf forwarding Mgmt-intf
+ no ip address
+ negotiation auto
+
+interface Vlan1
+ no ip address
+
+router rip
+ version 2
+ redistribute connected
+ redistribute bgp 4 metric 5
+ passive-interface GigabitEthernet0/0/0
+ network 192.168.2.0
+ neighbor 192.168.2.2
+ no auto-summary
+
+router bgp 4
+ bgp log-neighbor-changes
+ neighbor 2001::1 remote-as 2
+ neighbor 2001::3 remote-as 6
+ neighbor 192.168.0.1 remote-as 2
+ neighbor 192.168.0.3 remote-as 6
+ !
+ address-family ipv4
+  redistribute rip
+  no neighbor 2001::1 activate
+  no neighbor 2001::3 activate
+  neighbor 192.168.0.1 activate
+  neighbor 192.168.0.3 activate
+ exit-address-family
+ !
+ address-family ipv6
+  redistribute rip RIPforV6 include-connected
+  neighbor 2001::1 activate
+  neighbor 2001::3 activate
+ exit-address-family
+
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+ip tftp source-interface GigabitEthernet0
+
+ipv6 router rip RIPforV6
+ redistribute connected
+ redistribute bgp 4 metric 5
+
+control-plane
+
+line con 0
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login
+
+end

@@ -1,0 +1,16 @@
+dot11 ssid CCNP_67_444_SSID_1
+   authentication open
+   authentication key-management wpa version 2
+   wpa-psk ascii Cisco123
+
+dot11 ssid - make new ssid named CCNP_67_444_SSID_1
+auth open 
+authentication key-management wpa version 2 - set wpa2
+wpa-psk ascii Cisco123 - set psk
+
+same with CCNP_67_444_SSID_2
+
+interface dot11Radio 0 - 4.2 ghz
+ssid <ssid> - add ssid to interface
+channel least-congested - set channel to least congested
+no shut

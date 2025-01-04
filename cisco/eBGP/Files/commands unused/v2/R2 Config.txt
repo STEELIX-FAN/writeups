@@ -1,0 +1,43 @@
+hostname JacobAaronAidenR2
+ipv6 unicast-routing
+!
+int g0/0/1 
+ no shut
+ ip address 192.168.1.1 255.255.255.0
+ ipv6 address 2001:1::1/64
+ ip ospf 1 area 0
+ ipv6 ospf 1 area 0
+!
+int g0/0/0
+ no shut
+ ip address 192.168.0.1 255.255.255.0
+ ipv6 address 2001::1/64
+ ipv6 ospf 1 area 0
+!
+router ospf 1 
+ router-id 2.2.2.2
+ passive-interface g0/0/0
+ redistribute bgp 2
+!
+ipv6 router ospf 1
+ router-id 2.2.2.2
+ passive-interface g0/0/0
+ redistribute bgp 2
+!
+router bgp 2
+ neighbor 192.168.0.2 remote-as 4
+ neighbor 192.168.0.3 remote-as 6
+ neighbor 2001::2 remote-as 4
+ neighbor 2001::3 remote-as 6
+ address-family ipv4 unicast
+  network 192.168.0.0 mask 255.255.255.0
+  network 192.168.1.0 mask 255.255.255.0
+  network 1.1.1.1 mask 255.255.255.255
+  no auto-summary
+ !
+ address-family ipv6
+  neighbor 2001::2 activate
+  neighbor 2001::3 activate
+  redistribute ospf 1
+ !
+!

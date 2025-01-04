@@ -1,0 +1,25 @@
+hostname JacobAaronAidenR1
+ipv6 unicast-routing
+!
+int g0/0/1
+ ip address 192.168.1.2 255.255.255.0
+ ipv6 address 2001:1::2/64
+ no shut
+ ip ospf 1 area 0
+ ipv6 ospf 1 area 0
+!
+int lo0
+ ip address 1.1.1.1 255.255.255.0
+ ipv6 address 2001:1:1:1::1/64
+ no shut
+ ip ospf 1 area 0
+ ipv6 ospf 1 area 0
+!
+router ospf 1
+ router-id 1.1.1.1
+ redistribute connected
+!
+ipv6 router ospf 1
+ router-id 1.1.1.1
+ redistribute connected
+!

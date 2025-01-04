@@ -1,0 +1,161 @@
+!
+! Last configuration change at 20:22:41 UTC Wed Nov 8 2023
+!
+version 16.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname JacobAaronAidenR6
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Mgmt-intf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+!
+no aaa new-model
+!
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+ipv6 unicast-routing
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+license udi pid ISR4321/K9 sn FLM2408005M
+no license smart enable
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+!
+!
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 192.168.0.3 255.255.255.0
+ negotiation auto
+ ipv6 address 2001::3/64
+ ipv6 eigrp 1
+!
+interface GigabitEthernet0/0/1
+ ip address 192.168.3.1 255.255.255.0
+ negotiation auto
+ ipv6 address 2001:3::1/64
+ ipv6 eigrp 1
+!
+interface GigabitEthernet0/2/0
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet0/2/1
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet0
+ vrf forwarding Mgmt-intf
+ no ip address
+ negotiation auto
+!
+!
+router eigrp 1
+ network 192.168.3.0
+ redistribute bgp 6 metric 10000 100 255 1 1500
+ redistribute connected
+ passive-interface GigabitEthernet0/0/0
+ eigrp router-id 6.6.6.6
+!
+router bgp 6
+ bgp log-neighbor-changes
+ neighbor 2001::1 remote-as 2
+ neighbor 2001::2 remote-as 4
+ neighbor 192.168.0.1 remote-as 2
+ neighbor 192.168.0.2 remote-as 4
+ !
+ address-family ipv4
+  redistribute eigrp 1
+  no neighbor 2001::1 activate
+  no neighbor 2001::2 activate
+  neighbor 192.168.0.1 activate
+  neighbor 192.168.0.1 next-hop-self
+  neighbor 192.168.0.1 weight 200
+  neighbor 192.168.0.2 activate
+  neighbor 192.168.0.2 route-map map out
+ exit-address-family
+ !
+ address-family ipv6
+  redistribute eigrp 1 include-connected
+  neighbor 2001::1 activate
+  neighbor 2001::2 activate
+ exit-address-family
+!
+ip forward-protocol nd
+no ip http server
+ip http secure-server
+ip tftp source-interface GigabitEthernet0
+!
+!
+access-list 1 permit any
+ipv6 router eigrp 1
+ passive-interface GigabitEthernet0/0/0
+ eigrp router-id 6.6.6.6
+ redistribute bgp 6 metric 10000 100 255 1 1500
+ redistribute connected
+!
+!
+!
+route-map map permit 10
+ match ip address 1
+ set metric 500
+!
+route-map map permit 20
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ transport input none
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login
+!
+!
+!
+!
+!
+!
+end
